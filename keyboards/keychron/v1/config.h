@@ -37,3 +37,22 @@
 #define I2C1_TIMINGR_SCLL 51U
 
 #define SNLED27351_PHASE_CHANNEL SNLED27351_SCAN_PHASE_9_CHANNEL
+
+#define MOUSEKEY_DELAY 0            // 300 移動キーを押してからカーソルが移動するまでの遅延
+#define MOUSEKEY_INTERVAL 0          // 50 カーソル移動間の時間
+#define MOUSEKEY_MAX_SPEED 0         // 10 加速が停止する最大のカーソル速度
+#define MOUSEKEY_TIME_TO_MAX 0       // 20 最大カーソル速度に達するまでの時間
+#define MOUSEKEY_WHEEL_DELAY 0      // 300 ホイールキーを押してからホイールが動くまでの遅延
+#define MOUSEKEY_WHEEL_INTERVAL 0   // 100 ホイールの動きの間の時間
+#define MOUSEKEY_WHEEL_MAX_SPEED 2    // 8 スクロールアクションごとのスクロールステップの最大数
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 0 // 40 最大スクロール速度に達するまでの時間
+
+#define MK_3_SPEED
+#define MK_MOMENTARY_ACCEL
+
+#define MK_C_INTERVAL_0 0
+#define MK_C_INTERVAL_2 18
+
+#define MK_W_INTERVAL_0 110
+#define MK_W_INTERVAL_1 100
+#define MK_W_INTERVAL_2 80
