@@ -35,18 +35,19 @@ enum layers{
 
 enum custom_keycodes {
     MAC_L_CTRL = SAFE_RANGE,
-    MAC_L_COMMAND ,
-    EMACS_CTRL_K ,
-    WIN_SPACE , // 英語キーボード切り替え用
-    WIN_SPACE_JP , // 日本語キーボード切り替え用
-    SCROLL_LAYER , 
+    MAC_L_COMMAND,
+    EMACS_CTRL_K,
+    WIN_SPACE,    // 英語キーボード切り替え用
+    WIN_SPACE_JP, // 日本語キーボード切り替え用
+    SCROLL_LAYER,
+    CUSTOM_KC_LBRC, // カスタム[
     LOWER,
     RAISE,
     // for mytap_t
     LT_ESC,
     RT_SPC,
     CT_DEL,
-    //ST_SPC,
+    // ST_SPC,
 };
 
 #define KC_TASK LGUI(KC_TAB)
@@ -78,13 +79,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,           KC_LALT,  KC_LCTL,                                                       KC_SPC,                                KC_LCTL,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_MAC_CTRL] = LAYOUT_ansi_82(
-        _______,     KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,     KC_VOLU,  _______,            _______,
-        _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,  _______,            _______,
-        C(KC_TAB),   _______,  C(KC_W),  C(KC_E),  C(KC_R),  C(KC_T),  C(KC_Y),  C(KC_U),  C(KC_I),  C(KC_O),  KC_UP,    C(KC_LBRC),  _______,  _______,            _______,
-        C(KC_LSFT),  C(KC_A),  _______,  C(KC_D),  C(KC_F),  C(KC_G),  KC_BSPC,  KC_PENT,  C(KC_K),  C(KC_L),  _______,  KC_F10,      _______,            _______,
-        _______,     _______,  _______,  C(KC_C),  C(KC_V),  _______,  C(KC_B),  C(KC_N),  NK_TOGG,   _______, _______,  _______,               _______,  
-        _______,     _______,  _______,                                _______,                                _______,  _______,     _______,  _______,  _______,  _______),
-
+        _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,     _______,     _______,     _______,               _______,
+        _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,     _______,     _______,     _______,               _______,
+        C(KC_TAB),   C(KC_Q),  C(KC_W),  C(KC_E),  C(KC_R),  C(KC_T),  C(KC_Y),  C(KC_U),  C(KC_I),  C(KC_O),     C(KC_P),     C(KC_LBRC),  C(KC_RBRC),  C(KC_BSLS),            _______,
+        _______,     C(KC_A),  C(KC_S),  C(KC_D),  C(KC_F),  C(KC_G),  KC_BSPC,  KC_PENT,  C(KC_K),  C(KC_L),     C(KC_SCLN),  KC_F10,                   C(KC_ENT),             _______,
+        C(KC_LSFT),            C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),  C(KC_B),  C(KC_N),  C(KC_M),  C(KC_COMM),  C(KC_DOT),   C(KC_SLSH),               C(KC_RSFT),  _______,
+        _______,     _______,  _______,                                _______,                                   _______,     _______,     _______,     _______,     _______,     _______
+    ),
 
     [WIN_MAC_COMMAND] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,            _______,
@@ -116,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
-        _______,  _______,  _______,  _______,  KC_ACL2,  KC_ACL0,  _______,  KC_WH_U,  KC_WH_D,  _______,  _______,  _______,  _______,            _______,
+        _______,  _______,  _______,  _______,  KC_ACL2,  KC_ACL0,  _______,  KC_WH_D,  KC_WH_U,  _______,  _______,  _______,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,
         _______,  _______,  _______,                      _______,                      _______,  _______,  _______,  _______,  _______,  _______
         ),
@@ -170,6 +171,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
+        case CUSTOM_KC_LBRC:
+            if (record->event.pressed) {
+                register_code(KC_ESC);
+                unregister_code(KC_ESC);
+                register_code(KC_LCTL);
+                register_code(KC_LBRC);
+                unregister_code(KC_LBRC);
+                unregister_code(KC_LCTL);
+            }
+            return false;
+            break;
+
     }
 
     return true;
