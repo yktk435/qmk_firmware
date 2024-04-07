@@ -16,7 +16,9 @@
 
 #include QMK_KEYBOARD_H
 #include <print.h>
-#include <print.h>
+
+static uint16_t win_space_timer; // グローバル変数として定義
+
 
 #define _QWERTY 0
 #define _LOWER 1
@@ -37,7 +39,7 @@ enum custom_keycodes {
     MAC_L_CTRL = SAFE_RANGE,
     MAC_L_COMMAND,
     EMACS_CTRL_K,
-    WIN_SPACE,    // 英語キーボード切り替え用
+    WIN_SPACE = SAFE_RANGE,    // 英語キーボード切り替え用
     WIN_SPACE_JP, // 日本語キーボード切り替え用
     SCROLL_LAYER,
     CUSTOM_KC_LBRC, // カスタム[
@@ -76,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,            KC_Q,     KC_W,                    KC_E,             KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,    KC_P,     KC_LBRC,    KC_RBRC,  KC_BSLS,            KC_PGDN,
         MO(WIN_MAC_CTRL),  KC_A,     LT(MOUSE_SCROLL, KC_S),  LT(MOUSE, KC_D),  KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,    KC_SCLN,  KC_QUOT,              KC_ENT,             KC_HOME,
         KC_LSFT,           KC_Z,     KC_X,                    KC_C,             KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,  KC_SLSH,              KC_RSFT,  KC_UP,
-        KC_LCTL,           KC_LALT,  KC_LCTL,                                                       KC_SPC,                                KC_LCTL,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_LCTL,           KC_LALT,  WIN_SPACE,                                                       KC_SPC,                                KC_LCTL,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_MAC_CTRL] = LAYOUT_ansi_82(
         _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,     _______,     _______,     _______,               _______,
@@ -157,12 +159,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case WIN_SPACE:
             if (record->event.pressed) {
-                register_code(KC_LWIN);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
-                unregister_code(KC_LWIN);
+                // キーが押されたときの処理
+                win_space_timer = timer_read(); // タイマー開始
+                layer_on(WIN_MAC_CTRL);
+            } else {
+                // キーが離されたときの処理
+                layer_off(WIN_MAC_CTRL);
+                if (timer_elapsed(win_space_timer) < TAPPING_TERM) {
+                    // タップされた場合の処理
+                    SEND_STRING(SS_DOWN(X_LGUI) SS_TAP(X_SPACE) SS_UP(X_LGUI)); // Win + Space
+                } else {
+                    // 長押しの場合の処理（ここでは何もしない）
+                    // 通常、Ctrl の動作は別途 MT(MOD_LCTL, KC_???) などでマップする必要がある
+                }
             }
-            return false;
+            return false; // これ以上の処理をしない
             break;
         case WIN_SPACE_JP:
             if (record->event.pressed) {
