@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,     _______,     _______,     _______,               _______,
         _______,     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,     _______,     _______,     _______,     _______,               _______,
         C(KC_TAB),   C(KC_Q),  C(KC_W),  C(KC_E),  C(KC_R),  C(KC_T),  C(KC_Y),  C(KC_U),  C(KC_I),  C(KC_O),     C(KC_P),     C(KC_LBRC),  C(KC_RBRC),  C(KC_BSLS),            _______,
-        _______,     C(KC_A),  C(KC_S),  C(KC_D),  C(KC_F),  C(KC_G),  KC_BSPC,  KC_PENT,  C(KC_K),  C(KC_L),     C(KC_SCLN),  KC_F10,                   C(KC_ENT),             _______,
+        _______,     C(KC_A),  C(KC_S),  C(KC_D),   C(KC_F),  C(KC_G),  KC_BSPC,  KC_PENT,  C(KC_K),  C(KC_L),     C(KC_SCLN),  KC_F10,                   C(KC_ENT),             _______,
         C(KC_LSFT),            C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),  C(KC_B),  C(KC_N),  C(KC_M),  C(KC_COMM),  C(KC_DOT),   C(KC_SLSH),               C(KC_RSFT),  _______,
         _______,     _______,  _______,                                _______,                                   _______,     _______,     _______,     _______,     _______,     _______
     ),

@@ -51,9 +51,12 @@
 #define MK_MOMENTARY_ACCEL
 
 #define MK_C_INTERVAL_0 1 // 16
-#define MK_C_INTERVAL_1 16 // 16
+#define MK_C_INTERVAL_1 18 // 16
 #define MK_C_INTERVAL_2 15 // 16
 
 #define MK_W_INTERVAL_0 200 // 360
 #define MK_W_INTERVAL_1 80 // 120
 #define MK_W_INTERVAL_2 20 // 20
+
+// タップ判定 ms デフォルトは 200
+#define TAPPING_TERM 110
